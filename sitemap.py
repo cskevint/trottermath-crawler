@@ -17,10 +17,12 @@ priorityMap = {
     "Basic Algebra": "0.80",
     "Humor or items of lighthearted math": "0.60",
     "Personal and/or Miscellaneous": "0.80",
+    "My Story": "1.00",
 }
 
-header = """
-<?xml version="1.0" encoding="UTF-8"?>
+
+
+header = """<?xml version="1.0" encoding="UTF-8"?>
 <urlset
   xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
