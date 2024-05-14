@@ -1,6 +1,9 @@
+import json
 import requests
 import urllib.parse
 from bs4 import BeautifulSoup
+from collections import defaultdict
+
 
 host = "http://www.trottermath.net"
 netloc = "www.trottermath.net"
@@ -30,10 +33,14 @@ def fix_url(current_url, url):
 urls = {fix_url(host, host)}
 processed = set()
 
+history = {}
+
 # until all pages have been visited
 while len(urls) != 0 and processed_url_max > 0:
     # get the page to visit from the list
     current_url = urls.pop()
+    if current_url not in history:
+        history[current_url] = []
     processed_url_max -= 1
 
     # crawling logic
@@ -47,6 +54,7 @@ while len(urls) != 0 and processed_url_max > 0:
         url = link_element["href"]
         try:
             fixed_url = fix_url(current_url, url)
+            history[current_url].append(url)
             if fixed_url not in processed:
                 urls.add(fixed_url)
                 processed.add(current_url)
@@ -55,4 +63,6 @@ while len(urls) != 0 and processed_url_max > 0:
 
 for url in processed:
     print(url)
-print(other_hosts)
+# print(other_hosts)
+
+print(json.dumps(history, indent=2))
